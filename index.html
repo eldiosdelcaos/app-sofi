@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Gráficos para Sofi 💜</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body style="font-family: sans-serif; text-align: center;">
+
+<h2>Ingresá tus datos 📊</h2>
+
+<textarea id="data" rows="5" cols="30">
+Enero 10
+Febrero 20
+Marzo 15
+</textarea>
+
+<br><br>
+<button onclick="crearGrafico()">Crear gráfico</button>
+
+<canvas id="grafico"></canvas>
+
+<script>
+function crearGrafico() {
+  const texto = document.getElementById("data").value;
+  const lineas = texto.split("\n");
+
+  let labels = [];
+  let valores = [];
+
+  lineas.forEach(linea => {
+    const partes = linea.split(" ");
+    if (partes.length === 2) {
+      labels.push(partes[0]);
+      valores.push(Number(partes[1]));
+    }
+  });
+
+  const ctx = document.getElementById('grafico');
+
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Datos',
+        data: valores
+      }]
+    }
+  });
+}
+</script>
+
+</body>
+</html>
